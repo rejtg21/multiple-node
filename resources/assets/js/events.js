@@ -3,8 +3,16 @@ import moment from 'moment';
 
 import io from 'socket.io-client';
 
-const socket = io();
+let ports = [3001, 3000];
+let port = ports[randomInteger(0, 1)];
+let host = 'localhost';
 
+let url = 'http://' + host + ':' + port;
+const socket = io(url);
+
+function randomInteger(from, to) {
+    return Math.round(Math.random(from, to));
+}
 socket.on('connect', function() {
     console.log('successfully connected to socket server');
 });
@@ -20,7 +28,7 @@ function renderChat(data) {
             <div class="card message-card m-1">
                 <div class="card-body p-2">
                     <span>` + data.message + `</span>
-                    
+
                     <span class="float-right">` + data.time + `</span>
                 </div>
             </div>

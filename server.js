@@ -13,22 +13,37 @@ const server = require('http').createServer(app);
 
 const io = require('socket.io')(server);
 const redisAdapter = require('socket.io-redis');
-// Redis Clustering
-// const Redis = require('ioredis');
 
-// const startupNodes = [
-//     {
-//         port:
-//     }
-// ];
-// End redis clustering
+const Redis = require('ioredis');
+// Redis Cluster/Sentinel
+var redisType = ENV.REDIS_TYPE;
+
+if (redisType == 'cluster') {
+    const redisServers = JSON.parse(ENV.REDIS_CLUSTERS);
+    // End Redis Cluster/Sentinel
+    var adapter = redisAdapter({
+        pubClient: new Redis.Cluster(redisServers),
+        subClient: new Redis.Cluster(redisServers)
+    });
+} else {
+    const redisServer = JSON.parse(ENV.REDIS);
+    var adapter = redisAdapter(redisServer);
+}
+
+adapter.pubClient.on('error', function(err) {
+    console.log('redis adapter pub client error', err);
+});
+
+adapter.subClient.on('error', function(err) {
+    console.log('redis adapter sub client error', err);
+});
+
+io.adapter(adapter);
 
 // all client routes is located here
 app.use('/', express.static(__dirname + '/public'));
 
 require('./routes')(app);
-
-io.adapter(redisAdapter({host: config.host, port: 6379}));
 
 io.on('connection', (socket) => {
 
