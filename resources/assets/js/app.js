@@ -1,5 +1,8 @@
 import $ from 'jquery';
 
+import './events';
+
+
 document.addEventListener('DOMContentLoaded', function () {
     $('.card-header').on('click', '[data-fa-i2svg]', function () {
         $("#sidebar-content")

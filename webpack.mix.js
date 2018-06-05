@@ -1,5 +1,5 @@
+const path = require('path');
 let mix = require('laravel-mix');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,8 +11,9 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js/app.js')
-    .sass('resources/assets/css/app.scss', 'public/css/app.css');
+mix.setPublicPath('public/')
+    .js('resources/assets/js/app.js', 'js/app.js')
+    .sass('resources/assets/css/app.scss', 'css/app.css');
 
 // Full API
 // mix.js(src, output);
@@ -43,11 +44,11 @@ mix.js('resources/assets/js/app.js', 'public/js/app.js')
 // mix.babelConfig({}); <-- Merge extra Babel configuration (plugins, etc.) with Mix's default.
 // mix.then(function () {}) <-- Will be triggered each time Webpack finishes building.
 // mix.extend(name, handler) <-- Extend Mix's API with your own components.
-mix.options({
-    // extractVueStyles: false, // Extract .vue component styling to file, rather than inline.
-    // globalVueStyles: file, // Variables file to be imported in every component.
-    processCssUrls: true, // Process/optimize relative stylesheet url()'s. Set to false, if you don't want them touched.
-    purifyCss: true, // Remove unused CSS selectors.
-    // uglify: {}, // Uglify-specific options. https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
-    // postCss: [] // Post-CSS options: https://github.com/postcss/postcss/blob/master/docs/plugins.md
-});
+// mix.options({
+// extractVueStyles: false, // Extract .vue component styling to file, rather than inline.
+// globalVueStyles: file, // Variables file to be imported in every component.
+// processCssUrls: true, // Process/optimize relative stylesheet url()'s. Set to false, if you don't want them touched.
+// purifyCss: true, // Remove unused CSS selectors.
+// uglify: {}, // Uglify-specific options. https://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
+// postCss: [] // Post-CSS options: https://github.com/postcss/postcss/blob/master/docs/plugins.md
+// });

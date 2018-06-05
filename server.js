@@ -24,7 +24,7 @@ const redisAdapter = require('socket.io-redis');
 // End redis clustering
 
 // all client routes is located here
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/public'));
 
 require('./routes')(app);
 
@@ -34,6 +34,11 @@ io.on('connection', (socket) => {
 
     console.log('a user has connected with socketId', socket.id);
 
+    socket.on('sendMessage', function(data) {
+        console.log('receive a message from', this.id);
+        console.log('saying:', data);
+        socket.broadcast.emit('messageReceive', data);
+    });
 });
 
 server.listen(config.port, function() {

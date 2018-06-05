@@ -3,7 +3,7 @@
 <html>
   <head>
     <title>Sample Chat App</title>
-    <link href="public/css/app.css" rel="stylesheet" type="text/css">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
 
   </head>
   <body>
@@ -64,7 +64,7 @@
                       <div class="d-flex flex-row justify-content-start">
                           <div class="col-1 p-1">
                               <button class="btn text-white bg-darkblue p-0 hover-color-lightgray">
-                                  <i class="fas fa-bars fa-2x"></i>
+                                  <i class="fa fa-bars fa-2x"></i>
                               </button>
                           </div>
                           <div class="col">
@@ -77,56 +77,16 @@
                           </div>
                       </div>
                   </div>
+                  <!-- messages container -->
                   <div class="card-body bg-lightgrey d-flex flex-column p-0" style="flex: 9 1">
-                      <div class="container-fluid message-scroll" style="flex: 1 1">
-                          <div class="row">
-                              <div class="card message-card m-1">
-                                  <div class="card-body p-2">
-                                      <span class="mx-2">Hi, Dave</span>
-                                      <span class="float-right mx-1"><small>14:13<i class="fas fa-eye fa-fw" style="color:#e64980"></i></small></span>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row justify-content-end">
-                              <div class="card message-card bg-lightblue m-1">
-                                  <div class="card-body p-2">
-                                      <span class="mx-2">Hello, Stan</span>
-                                      <span class="float-right mx-1"><small>14:14<i class="fas fa-eye fa-fw" style="color:#e64980"></i></small></span>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row justify-content-end">
-                              <div class="card message-card bg-lightblue m-1">
-                                  <div class="card-body p-2">
-                                      <span class="mx-2">What's up?</span>
-                                      <span class="float-right mx-1"><small>14:14<i class="fas fa-check fa-fw" style="color:#66a80f"></i></small></span>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="card message-card m-1">
-                                  <div class="card-body p-2">
-                                      <span>So far so good, but my plumbus doesn't work as well as Meeseeks can't fix it, please, help me or they... They gonna kill Morty...</span>
-                                      <span class="float-right"><small>14:16<i class="fas fa-eye fa-fw" style="color:#e64980"></i></small></span>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row justify-content-end">
-                              <div class="card message-card bg-lightblue m-1">
-                                  <div class="card-body p-2">
-                                      <span>I've called Rick, I'm on the way to your house,
-                              but probably I lost my portal gun at the party yesterday.
-                              Anyway, don't call the other Meeseeks solve this shit.</span>
-                                      <span class="float-right mx-1"><small>14:21<i class="fas fa-check fa-fw" style="color:#66a80f"></i></small></span>
-                                  </div>
-                              </div>
-                          </div>
+                      <div class="container-fluid message-scroll" id="messageContent" style="flex: 1 1">
+
                       </div>
                       <div class="input-group">
-                          <input type="text" class="form-control border-0" placeholder="Input message...">
+                          <input type="text" id="chatInput" class="form-control border-0" placeholder="Input message...">
                           <span class="input-group-addon">
-                              <button class="btn border-0 bg-white text-primary hover-color-darkblue" type="button">
-                                  <i class="fab fa-telegram-plane fa-2x"></i>
+                              <button id="sendBtn" class="btn border-0 bg-white text-primary hover-color-darkblue" type="button">
+                                  <i class="fa fa-paper-plane fa-2x"></i>
                               </button>
                           </span>
                       </div>
@@ -138,5 +98,5 @@
   </div>
   <!-- container -->
   </body>
-  <script src="public/js/app.js"></script>
+  <script src="js/app.js"></script>
 </html>
