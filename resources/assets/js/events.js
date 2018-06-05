@@ -9,6 +9,10 @@ socket.on('connect', function() {
     console.log('successfully connected to socket server');
 });
 
+socket.on('messageReceive', function(data) {
+    console.log('receive message', data);
+    renderChat(data);
+});
 
 function renderChat(data) {
     return $('#messageContent').append(
@@ -16,6 +20,7 @@ function renderChat(data) {
             <div class="card message-card m-1">
                 <div class="card-body p-2">
                     <span>` + data.message + `</span>
+                    
                     <span class="float-right">` + data.time + `</span>
                 </div>
             </div>
@@ -23,11 +28,7 @@ function renderChat(data) {
     );
 }
 
-function renderOwnChat(value) {
-    let data = {
-        message: value,
-        time: moment().format('h:mm:ss A')
-    };
+function renderOwnChat(data) {
 
     return $('#messageContent').append(
         `<div class="row justify-content-end">
@@ -41,9 +42,16 @@ function renderOwnChat(value) {
     );
 }
 
-socket.on('message', function(data) {
-    renderChat(data);
-});
+function chat(chatInput) {
+    let data = {
+        message: chatInput.val(),
+        time: moment().format('h:mm:ss A')
+    };
+
+    renderOwnChat(data);
+    socket.emit('sendMessage', data);
+}
+
 
 $('#chatInput').on('keyup', function(event) {
     if (event.which != 13) return;
@@ -51,17 +59,13 @@ $('#chatInput').on('keyup', function(event) {
     event.preventDefault();
 
     let chatInput = $(this);
-    let val = chatInput.val();
-    renderOwnChat(val);
-    socket.emit('sendMessage', val);
+    chat(chatInput);
 
     chatInput.val('');
 });
 
 $('#sendBtn').on('click', function() {
     let chatInput = $('#chatInput');
-    let val = chatInput.val();
-    renderOwnChat(chatInput.val());
-    socket.emit('sendMessage', val);
+    chat(chatInput);
     chatInput.val('');
 });

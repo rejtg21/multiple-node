@@ -33,11 +33,11 @@ io.adapter(redisAdapter({host: config.host, port: 6379}));
 io.on('connection', (socket) => {
 
     console.log('a user has connected with socketId', socket.id);
-
+    socket.join('chat');
     socket.on('sendMessage', function(data) {
         console.log('receive a message from', this.id);
         console.log('saying:', data);
-        socket.broadcast.emit('messageReceive', data);
+        socket.broadcast.to('chat').emit('messageReceive', data);
     });
 });
 
