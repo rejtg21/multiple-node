@@ -2,9 +2,8 @@ import $ from 'jquery';
 import moment from 'moment';
 
 import io from 'socket.io-client';
-
-let ports = [3001, 3000];
-let port = ports[randomInteger(0, 1)];
+console.log('available ports', window.PORTS);
+let port = window.PORTS[randomInteger(0, 1)];
 let host = 'localhost';
 
 let url = 'http://' + host + ':' + port;
