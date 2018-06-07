@@ -47,10 +47,10 @@ require('./routes')(app);
 
 io.on('connection', (socket) => {
 
-    console.log('a user has connected with socketId', socket.id);
+    console.log('a user has connected with socketId', socket.id, 'in process id', process.pid);
     socket.join('chat');
     socket.on('sendMessage', function(data) {
-        console.log('receive a message from', this.id);
+        console.log('receive a message from', this.id, 'in process id', process.pid);
         console.log('saying:', data);
         socket.broadcast.to('chat').emit('messageReceive', data);
     });
